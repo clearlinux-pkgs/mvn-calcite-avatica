@@ -4,7 +4,7 @@
 #
 Name     : mvn-calcite-avatica
 Version  : 1.2.0.incubating
-Release  : 1
+Release  : 2
 URL      : https://repo1.maven.org/maven2/org/apache/calcite/calcite-avatica/1.2.0-incubating/calcite-avatica-1.2.0-incubating.jar
 Source0  : https://repo1.maven.org/maven2/org/apache/calcite/calcite-avatica/1.2.0-incubating/calcite-avatica-1.2.0-incubating.jar
 Source1  : https://repo1.maven.org/maven2/org/apache/calcite/calcite-avatica/1.2.0-incubating/calcite-avatica-1.2.0-incubating.pom
