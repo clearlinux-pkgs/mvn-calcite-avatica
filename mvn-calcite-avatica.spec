@@ -4,14 +4,19 @@
 #
 Name     : mvn-calcite-avatica
 Version  : 1.2.0.incubating
-Release  : 3
+Release  : 4
 URL      : https://repo1.maven.org/maven2/org/apache/calcite/calcite-avatica/1.2.0-incubating/calcite-avatica-1.2.0-incubating.jar
 Source0  : https://repo1.maven.org/maven2/org/apache/calcite/calcite-avatica/1.2.0-incubating/calcite-avatica-1.2.0-incubating.jar
-Source1  : https://repo1.maven.org/maven2/org/apache/calcite/calcite-avatica/1.2.0-incubating/calcite-avatica-1.2.0-incubating.pom
+Source1  : https://repo.maven.apache.org/maven2/org/apache/calcite/avatica/avatica-core/1.12.0/avatica-core-1.12.0.jar
+Source2  : https://repo.maven.apache.org/maven2/org/apache/calcite/avatica/avatica-core/1.12.0/avatica-core-1.12.0.pom
+Source3  : https://repo1.maven.org/maven2/org/apache/calcite/calcite-avatica/1.2.0-incubating/calcite-avatica-1.2.0-incubating.pom
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : Apache-2.0
 Requires: mvn-calcite-avatica-data = %{version}-%{release}
+Requires: mvn-calcite-avatica-license = %{version}-%{release}
+BuildRequires : apache-maven
+BuildRequires : buildreq-mvn
 
 %description
 No detailed description available
@@ -24,16 +29,34 @@ Group: Data
 data components for the mvn-calcite-avatica package.
 
 
+%package license
+Summary: license components for the mvn-calcite-avatica package.
+Group: Default
+
+%description license
+license components for the mvn-calcite-avatica package.
+
+
 %prep
+%setup -q -n META-INF
 
 %build
 
 %install
+mkdir -p %{buildroot}/usr/share/package-licenses/mvn-calcite-avatica
+cp LICENSE %{buildroot}/usr/share/package-licenses/mvn-calcite-avatica/LICENSE
+cp NOTICE %{buildroot}/usr/share/package-licenses/mvn-calcite-avatica/NOTICE
 mkdir -p %{buildroot}/usr/share/java/.m2/repository/org/apache/calcite/calcite-avatica/1.2.0-incubating
-cp %{SOURCE0} %{buildroot}/usr/share/java/.m2/repository/org/apache/calcite/calcite-avatica/1.2.0-incubating
+cp %{SOURCE0} %{buildroot}/usr/share/java/.m2/repository/org/apache/calcite/calcite-avatica/1.2.0-incubating/calcite-avatica-1.2.0-incubating.jar
+
+mkdir -p %{buildroot}/usr/share/java/.m2/repository/org/apache/calcite/avatica/avatica-core/1.12.0
+cp %{SOURCE1} %{buildroot}/usr/share/java/.m2/repository/org/apache/calcite/avatica/avatica-core/1.12.0/avatica-core-1.12.0.jar
+
+mkdir -p %{buildroot}/usr/share/java/.m2/repository/org/apache/calcite/avatica/avatica-core/1.12.0
+cp %{SOURCE2} %{buildroot}/usr/share/java/.m2/repository/org/apache/calcite/avatica/avatica-core/1.12.0/avatica-core-1.12.0.pom
 
 mkdir -p %{buildroot}/usr/share/java/.m2/repository/org/apache/calcite/calcite-avatica/1.2.0-incubating
-cp %{SOURCE1} %{buildroot}/usr/share/java/.m2/repository/org/apache/calcite/calcite-avatica/1.2.0-incubating
+cp %{SOURCE3} %{buildroot}/usr/share/java/.m2/repository/org/apache/calcite/calcite-avatica/1.2.0-incubating/calcite-avatica-1.2.0-incubating.pom
 
 
 %files
@@ -41,5 +64,12 @@ cp %{SOURCE1} %{buildroot}/usr/share/java/.m2/repository/org/apache/calcite/calc
 
 %files data
 %defattr(-,root,root,-)
+/usr/share/java/.m2/repository/org/apache/calcite/avatica/avatica-core/1.12.0/avatica-core-1.12.0.jar
+/usr/share/java/.m2/repository/org/apache/calcite/avatica/avatica-core/1.12.0/avatica-core-1.12.0.pom
 /usr/share/java/.m2/repository/org/apache/calcite/calcite-avatica/1.2.0-incubating/calcite-avatica-1.2.0-incubating.jar
 /usr/share/java/.m2/repository/org/apache/calcite/calcite-avatica/1.2.0-incubating/calcite-avatica-1.2.0-incubating.pom
+
+%files license
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/mvn-calcite-avatica/LICENSE
+/usr/share/package-licenses/mvn-calcite-avatica/NOTICE
